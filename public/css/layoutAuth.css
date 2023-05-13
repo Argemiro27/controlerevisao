@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;1,100&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Exo 2', sans-serif;
+
+    color: #dde4eb;
+}
+
+body {
+    height: 100vh;
+    background-color: #41cac0 !important;
+}
+
+.card {
+    background-color: #1d4a5f !important;
+    box-shadow: 1px 1px 10px  black;
+}
+
+.navbar-nav {
+    flex-direction: column;
+}
+
+.navbar-collapse {
+    width: 100%;
+}
+
+.navbar-nav .nav-item {
+    width: 100%;
+    text-align: center;
+}
+
+.navbar-nav .nav-item .nav-link {
+    padding: 0.5rem 0;
+}
+
+.btn.btn-primary.submit {
+    background-color: #4dd8c1 !important;
+    border: none;
+    color: #fcffff !important;
+    position: absolute;
+}
+
+a {
+    color: #4dd8c1 !important;
+    font-weight: bold;
+}
+
+input{
+    background-color: #0e2d3f !important;
+    border: none !important;
+    color: #dde4eb !important;
+}
