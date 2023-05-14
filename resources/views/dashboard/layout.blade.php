@@ -15,7 +15,8 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-light">
-            <img src="img/logo.png" style="width: 50px; height: auto" />
+            <img src="img/logo.png" style="width: 50px; height: auto; margin-left: 50px;
+            margin-right: 50px;" />
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

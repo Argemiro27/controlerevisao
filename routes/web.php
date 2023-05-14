@@ -79,10 +79,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/produtos/buscar', [ProdutosController::class, 'buscar'])->name('produtos.buscar');
     Route::get('/usuarios/buscar', [AuthController::class, 'buscar'])->name('usuarios.buscar');
 
-    //Editar & atualizar
-    Route::put('/editarproduto', function () {
-        return view('dashboard.editarvenda');
-    })->name('editarvenda');
 
 //Carregar página de edição do produto
     Route::get('/produtos/{id}/editar', [ProdutosController::class, 'edit'])->name('produtos.edit');

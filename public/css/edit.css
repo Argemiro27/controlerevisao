@@ -1,5 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;1,100&display=swap");
 
+body{
+    background-color: #0e2d3f;
+}
+
+.form{
+    padding: 120px;
+    background-color: #082435 !important;
+}
+i{
+    margin-bottom: 10px;
+    color: rgb(189, 187, 190) !important;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -60,7 +73,6 @@ input {
 }
 
 
-
 .container {
     min-height: 90vh;
     border-radius: 15px;
@@ -84,11 +96,11 @@ table{
 
 td,
 th {
-    border: 1px solid #08212e !important;
+    border: 2px solid transparent !important;
 }
 
 thead {
-    background-color: #0a2533 !important;
+    background-color: transparent !important;
     color: #90949f;
     border: none;
 }
@@ -118,3 +130,9 @@ input {
     border-radius: 5px;
 }
 
+.btn-back{
+    border-radius: 100px;
+    padding: 10px;
+    border: 2px solid #14374b !important;
+    background-color: #14374b !important;
+}

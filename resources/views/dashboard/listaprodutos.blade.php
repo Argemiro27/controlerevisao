@@ -31,7 +31,7 @@
                         <td>{{ $produto->foto_produto }}</td>
                         <td>{{ $produto->preco }}</td>
                         <td>
-                            <a href="{{ route('produtos.edit', $produto->id) }}" class="btn btn-primary">Editar</a>
+                            <a href="{{ route('produtos.edit', $produto->id) }}" class="btn btn-primary submit">Editar</a>
                         </td>
                         <td>
                             <a href="{{ route('produtos.destroy', $produto->id) }}" class="btn btn-danger"

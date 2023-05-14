@@ -63,31 +63,48 @@ class ProdutosController extends Controller
     public function edit($id)
     {
         $produto = Produtos::find($id);
-        return view('dashboard.editarproduto', compact('produto', 'id'));
+        return view('produtos.edit', compact('produto', 'id'));
     }
 
     public function update(Request $request, $id)
     {
         $produto = Produtos::findOrFail($id);
-        $produto->usuario_id = auth()->user()->id;
         $produto->nome_produto = $request->nome_produto;
         $produto->sku = $request->sku;
         $produto->descricao = $request->descricao;
         $produto->estoqueprod = $request->estoqueprod;
         $produto->preco = $request->preco;
-
-        $produto->save();
-
-        $id_produto = $produto->id;
-
-        // Percorre as variações selecionadas no formulário
+    
+        // Verifique se uma nova imagem foi enviada
+        if ($request->hasFile('foto_produto')) {
+            $foto_produto = $request->file('foto_produto');
+            $path = 'www/' . $produto->nome_produto . '/' . $produto->sku;
+            if (!is_dir($path)) {
+                mkdir($path, 0755, true);
+            }
+            
+            $filename = $foto_produto->getClientOriginalName();
+            $foto_produto->storeAs($path, $filename);
+            $produto->foto_produto = $path . '/' . $filename;
+        }
+    
+        // Exclua as variações antigas do produto
+        VariaProduto::where('id_produto', $produto->id)->delete();
+    
+        // Adicione as novas variações selecionadas no formulário
         foreach ($request->input('variacao') as $variacao_id) {
-            $variaproduto = Produtos::find($id_variacao);
+            $variacao = Variacao::find($variacao_id);
+    
+            $variaproduto = new VariaProduto;
+            $variaproduto->id_produto = $produto->id;
             $variaproduto->id_variacao = $variacao->id;
             $variaproduto->tipovariacao_id = $variacao->tipovariacao_id;
             $variaproduto->save();
         }
-
+    
+        // Salve as alterações no banco de dados
+        $produto->save();
+    
         return redirect()->back()->with('success', 'Produto atualizado com sucesso!');
     }
 
