@@ -2,6 +2,15 @@
 
 @section('content')
     <div class="container mt-4">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @elseif (session('error'))
+            <div class="alert alert-error">
+                {{ session('error') }}
+            </div>
+        @endif
         <h1 class="mb-4">Cadastrar Variação</h1>
         <form method="POST" action="{{ route('variacao.store') }}">
             @csrf
@@ -25,14 +34,8 @@
                 <label for="variacao">Variação</label>
                 <input type="text" class="form-control" id="variacao" name="variacao" required>
             </div>
-    </div>
 
-    <button type="submit" class="btn btn-primary submit">Cadastrar</button>
-    </form>
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+            <button type="submit" class="btn btn-primary submit">Cadastrar</button>
+        </form>
     </div>
 @endsection

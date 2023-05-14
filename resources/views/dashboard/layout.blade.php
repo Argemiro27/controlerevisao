@@ -7,6 +7,7 @@
     <title>Sistema de Cadastro de Produtos</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="css/layoutDashboard.css">
+    <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
@@ -22,6 +23,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
+                        <a class="nav-link" href="/home"><i class="fas fa-home"></i> Início</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/cadastrarproduto"><i class="fas fa-box"></i> Cadastrar Produto</a>
                     </li>
                     <li class="nav-item">
@@ -31,6 +35,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/cadastrarvariacao"><i class="fas fa-sliders-h"></i> Cadastrar
                             Variação</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/listaprodutos"><i class="fas fa-sliders-h"></i> Lista de Produtos</a>
                     </li>
 
                 </ul>
@@ -54,7 +61,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="{{ asset('js/atualizarvariacoes.js') }}"></script>
 </body>
 
 </html>

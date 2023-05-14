@@ -1,0 +1,34 @@
+.cardwrapper {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    width: 18rem;
+    text-align: center;
+}
+
+.card:nth-child(1) {
+    background: rgb(126, 22, 53) !important;
+    
+}
+
+.card:nth-child(2) {
+    background: rgb(3, 59, 85) !important;
+}
+
+.card:nth-child(3) {
+    background: rgb(20, 99, 69) !important;
+    
+}
+
+.card-title, .card-text {
+    color: rgb(189, 187, 190) !important;
+    font-weight: bold;
+}
+
+i{
+    margin-bottom: 10px;
+    color: rgb(189, 187, 190) !important;
+}

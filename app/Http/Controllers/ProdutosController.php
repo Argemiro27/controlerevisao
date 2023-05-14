@@ -12,7 +12,7 @@ class ProdutosController extends Controller
     public function index()
     {
         $produtos = Produtos::all();
-        return view('dashboard.produtos.index', compact('produtos'));
+        return view('dashboard.listaprodutos', ['produtos' => $produtos]);
     }
 
     public function create()
@@ -29,63 +29,65 @@ class ProdutosController extends Controller
         $produto->descricao = $request->descricao;
         $produto->estoqueprod = $request->estoqueprod;
         $produto->preco = $request->preco;
-        $produto->save();
-
-        // Cria a pasta do produto dentro do diretório "public" do seu projeto
-        $produtoPath = public_path($produto->nome_produto);
-        if (!file_exists($produtoPath)) {
-            mkdir($produtoPath, 0777, true);
-        }
-
-        // Cria a pasta do SKU dentro da pasta do produto
-        $skuPath = $produtoPath . '/' . $produto->sku;
-        if (!file_exists($skuPath)) {
-            mkdir($skuPath, 0777, true);
-        }
-
-        // Salva a imagem carregada dentro da pasta do SKU
-        if ($request->hasFile('foto')) {
-            $image = $request->file('foto');
-            $imageName = $image->getClientOriginalName();
-            $imagePath = '/' . $produto->nome_produto . '/' . $produto->sku . '/' . $imageName;
-            $image->move(public_path($imagePath));
-
-            $produto->foto = $imagePath;
-        } else {
-            $produto->foto = 'sem-imagem.jpg';
-        }
-        $produto->save();
-
-        $variacao = Variacao::all();
-        foreach ($variacao as $variacao) {
-            $variacoes = $request->input('quantidade.' . $variacoes->id);
-
-            if ($variacoes > 0) {
-                $variaproduto = new VariaProduto;
-                $variaproduto->id_produto = $produto->id;
-                $variaproduto->id_variacao = $variacao->id;
-                $variaproduto->tipovariacao_id = $request->tipovariacao_id;
-                $variaproduto->save();
+        // Upload de imagem
+        if ($request->hasFile('foto_produto')) {
+            $foto_produto = $request->file('foto_produto');
+            $path = 'www/' . $produto->nome_produto . '/' . $produto->sku;
+            if (!is_dir($path)) {
+                mkdir($path, 0755, true);
             }
+            
+            $filename = $foto_produto->getClientOriginalName();
+            $foto_produto->storeAs($path, $filename);
+            $produto->foto_produto = $path . '/' . $filename;
         }
+
+        $produto->save();
+
+        $id_produto = $produto->id;
+
+        // Percorre as variações selecionadas no formulário
+        foreach ($request->input('variacao') as $variacao_id) {
+            $variacao = Variacao::find($variacao_id);
+
+            $variaproduto = new VariaProduto;
+            $variaproduto->id_produto = $id_produto;
+            $variaproduto->id_variacao = $variacao->id;
+            $variaproduto->tipovariacao_id = $variacao->tipovariacao_id;
+            $variaproduto->save();
+        }
+
         return redirect()->back()->with('success', 'Produto cadastrado com sucesso!');
     }
 
-    public function edit(Produtos $produto)
+    public function edit($id)
     {
-        return view('produtos.edit', ['produto' => $produto]);
+        $produto = Produtos::find($id);
+        return view('dashboard.editarproduto', compact('produto', 'id'));
     }
 
-    public function update(Request $request, Produtos $produto)
+    public function update(Request $request, $id)
     {
+        $produto = Produtos::findOrFail($id);
         $produto->usuario_id = auth()->user()->id;
         $produto->nome_produto = $request->nome_produto;
         $produto->sku = $request->sku;
-        $produto->foto = $request->foto;
         $produto->descricao = $request->descricao;
         $produto->estoqueprod = $request->estoqueprod;
         $produto->preco = $request->preco;
+
         $produto->save();
+
+        $id_produto = $produto->id;
+
+        // Percorre as variações selecionadas no formulário
+        foreach ($request->input('variacao') as $variacao_id) {
+            $variaproduto = Produtos::find($id_variacao);
+            $variaproduto->id_variacao = $variacao->id;
+            $variaproduto->tipovariacao_id = $variacao->tipovariacao_id;
+            $variaproduto->save();
+        }
+
         return redirect()->back()->with('success', 'Produto atualizado com sucesso!');
     }
 
@@ -107,10 +109,8 @@ class ProdutosController extends Controller
         return response()->json($produtos);
     }
 
-
-    public function getVariacoesByTipoVariacao($tipoVariacaoId)
-{
-    $variacoes = Variacao::where('tiposvariacao_id', $tipoVariacaoId)->get();
-    return response()->json($variacoes);
-}
+    public function tipoVariacao()
+    {
+        return $this->belongsTo(TipoVariacao::class, 'tipovariacao_id');
+    }
 }

@@ -67,7 +67,7 @@ input {
     height: cover;
     padding-bottom: 20px;
     padding: 15px;
-    margin-bottom: 50px;
+    margin-bottom: 0px;
 }
 
 .container .mt-4 {
@@ -75,8 +75,10 @@ input {
     box-shadow: none;
 }
 
-table {
-    border-collapse: collapse;
+table{
+    border-radius: 5px;
+    background-color: #0e2d3f !important;
+    
 }
 
 td,
@@ -111,6 +113,7 @@ select {
 
 input {
     color: #90949f !important;
-    padding: 5px;
+    border: 2px solid #14374b !important;
     border-radius: 5px;
 }
+

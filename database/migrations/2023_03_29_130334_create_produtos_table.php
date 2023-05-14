@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('usuario_id');
             $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
-            $table->string('nome_produto');
-            $table->string('sku');
-            $table->string('foto');
+            $table->string('nome_produto')->unique();
+            $table->string('sku')->unique();
             $table->string('descricao');
+            $table->string('foto_produto')->nullable();
             $table->string('estoqueprod');
             $table->decimal('preco', 8, 2);
             $table->timestamps();

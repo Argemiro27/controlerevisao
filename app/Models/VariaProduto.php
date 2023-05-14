@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class VariaProduto extends Model
 {
     use HasFactory;
+    
+    protected $table = 'variaproduto';
+    
     protected $fillable = [
         'id_produto',
         'id_variacao',
@@ -16,6 +19,6 @@ class VariaProduto extends Model
 
     public function produto()
     {
-        return $this->belongsTo(Produtos::class);
+        return $this->belongsTo(Produto::class, 'id_produto');
     }
 }

@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->foreign('id_variacao')->references('id')->on('variacao')->onDelete('cascade');
             $table->unsignedBigInteger('tipovariacao_id');
             $table->foreign('tipovariacao_id')->references('id')->on('tipos_variacao')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

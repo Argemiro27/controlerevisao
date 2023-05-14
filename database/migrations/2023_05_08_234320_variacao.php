@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('preco');
             $table->unsignedBigInteger('tipovariacao_id');
             $table->foreign('tipovariacao_id')->references('id')->on('tipos_variacao')->onDelete('cascade');
-            $table->string('variacao');
+            $table->string('variacao')->unique();;
             $table->timestamps();
         });
     }

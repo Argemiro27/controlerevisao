@@ -16,9 +16,9 @@ class Variacao extends Model
         'variacao'
     ];
 
-    public function tiposvariacao()
+    public function tipoVariacao()
     {
-        return $this->belongsTo(TiposVariacao::class);
+        return $this->belongsTo(TiposVariacao::class, 'tipovariacao_id');
     }
     public function produtos()
     {

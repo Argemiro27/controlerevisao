@@ -11,9 +11,11 @@
                 {{ session('error') }}
             </div>
         @endif
-        <h1 class="mb-4">Cadastrar Produtos</h1>
-        <form method="POST" action="{{ route('produtos.store') }}" enctype="multipart/form-data">
+        <h1 class="mb-4">Editar produto:</h1>
+        <form method="POST" action="{{ route('produtos.update', $produto->id) }}">
             @csrf
+            @method('PUT')
+
             <div class="form-group">
                 <label for="nome_produto">Nome do produto:</label>
                 <input type="text" class="form-control" id="nome_produto" name="nome_produto" required>
@@ -61,7 +63,7 @@
                 <label for="foto_produto">Foto</label>
                 <input type="file" class="form-control-file" id="foto_produto" name="foto_produto">
             </div>
-            <button type="submit" class="btn btn-primary submit">Cadastrar</button>
+            <button type="submit" class="btn btn-primary submit">Editar</button>
         </form>
     </div>
 @endsection

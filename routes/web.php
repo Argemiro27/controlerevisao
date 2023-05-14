@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProdutosController;
+use App\Http\Controllers\TiposVariacaoController;
 use App\Http\Controllers\VariacaoController;
 use App\Http\Controllers\VariaProdutoController;
-use App\Http\Controllers\TiposVariacaoController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +16,7 @@ use App\Http\Controllers\TiposVariacaoController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 // Rotas GET
 
@@ -32,17 +32,13 @@ Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
 
-
 // Rotas POST
-
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-
 
 // Rotas autenticadas
 
@@ -53,6 +49,11 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard.home');
     })->name('home');
 
+    //Lista de produtos
+    Route::get('/listaprodutos', function () {
+        return view('dashboard.listaprodutos');
+    })->name('listaprodutos');
+    Route::get('/listaprodutos', [ProdutosController::class, 'index'])->name('produtos.index');
     //Cadastrar produtos e variações
     Route::get('/cadastrarproduto', function () {
         return view('dashboard.cadastrarproduto');
@@ -78,26 +79,26 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/produtos/buscar', [ProdutosController::class, 'buscar'])->name('produtos.buscar');
     Route::get('/usuarios/buscar', [AuthController::class, 'buscar'])->name('usuarios.buscar');
 
-
     //Editar & atualizar
-    Route::get('/editarproduto', function () {
+    Route::put('/editarproduto', function () {
         return view('dashboard.editarvenda');
     })->name('editarvenda');
 
+//Carregar página de edição do produto
     Route::get('/produtos/{id}/editar', [ProdutosController::class, 'edit'])->name('produtos.edit');
-    Route::put('/produtos/{produto}', [ProdutosController::class, 'update'])->name('produtos.update');
 
-    Route::get('/variacao/{id}/editar', [VariacaoController::class, 'edit'])->name('variacao.edit');
+//Atualizar informações do produto
+    Route::put('/produtos/{id}', [ProdutosController::class, 'update'])->name('produtos.update');
+
+    Route::put('/variacao/{id}/editar', [VariacaoController::class, 'edit'])->name('variacao.edit');
     Route::put('/variacao/{variacao}', [VariacaoController::class, 'update'])->name('variacao.update');
 
-    Route::get('/tiposvariacao/{id}/editar', [TiposVariacaoController::class, 'edit'])->name('tiposvariacao.edit');
+    Route::put('/tiposvariacao/{id}/editar', [TiposVariacaoController::class, 'edit'])->name('tiposvariacao.edit');
     Route::put('/tiposvariacao/{tiposvariacao}', [TiposVariacaoController::class, 'update'])->name('tipos_variacao.update');
 
     //Remover
     Route::delete('/produtos/{id}', [ProdutosController::class, 'destroy'])->name('produtos.destroy');
     Route::delete('/variacao/{id}', [VariacaoController::class, 'destroy'])->name('variacao.destroy');
     Route::delete('/tiposvariacao/{id}', [TiposVariacaoController::class, 'destroy'])->name('tipos_variacao.destroy');
-
-    Route::get('/api/variacaobytipovariacao/{tipoVariacaoId}', [ProdutosController::class, 'getVariacoesByTipoVariacao']);
 
 });

@@ -20,11 +20,16 @@ class TiposVariacaoController extends Controller
 
     public function store(Request $request)
     {
-        $tiposVariacao = new TiposVariacao;
-        $tiposVariacao->nome = $request->nome;
-        $tiposVariacao->save();
-        return redirect()->back()->with('success', 'Tipo de variação cadastrado com sucesso!');
+        try {
+            $tiposVariacao = new TiposVariacao;
+            $tiposVariacao->nome = $request->nome;
+            $tiposVariacao->save();
+            return redirect()->back()->with('success', 'Tipo de variação cadastrado com sucesso!');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('error', 'Já existe um tipo de variação com este nome.');
+        }
     }
+    
 
     public function edit(TiposVariacao $tiposVariacao)
     {
