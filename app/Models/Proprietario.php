@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Usuarios extends Authenticatable
+class Proprietario extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     /**
@@ -17,29 +17,15 @@ class Usuarios extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'nome',
         'email',
-        'password',
-        'role',
+        'telefone',
+        'idade',
+        'sexo',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
+    public function carros()
+    {
+        return $this->hasMany(Carro::class);
+    }
 }

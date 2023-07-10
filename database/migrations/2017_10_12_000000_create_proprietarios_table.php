@@ -13,9 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tipos_variacao', function (Blueprint $table) {
+        Schema::create('proprietarios', function (Blueprint $table) {
             $table->id();
-            $table->string('nome')->unique();;
+            $table->string('nome');
+            $table->string('email');
+            $table->string('telefone');
+            $table->string('idade');
+            $table->string('sexo');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -27,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('variacao');
+        Schema::dropIfExists('proprietarios');
     }
 };

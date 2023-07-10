@@ -13,17 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('produtos', function (Blueprint $table) {
+        Schema::create('revisoes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('usuario_id');
-            $table->foreign('usuario_id')->references('id')->on('usuarios')->onDelete('cascade');
-            $table->string('nome_produto')->unique();
-            $table->string('sku')->unique();
+            $table->string('data');
+            $table->string('tipo');
             $table->string('descricao');
-            $table->string('foto_produto')->nullable();
-            $table->string('estoqueprod');
-            $table->decimal('preco', 8, 2);
+            $table->unsignedBigInteger('id_carro');
             $table->timestamps();
+
+            $table->foreign('id_carro')->references('id')->on('carros');
         });
     }
 
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produtos');
+        Schema::dropIfExists('revisoes');
     }
 };
