@@ -68,11 +68,9 @@ export default {
     },
 
     mounted() {
-        // Buscar os dados dos proprietários do servidor
         axios
-            .get("/api/proprietarios") // Certifique-se de ajustar a rota corretamente
+            .get("/api/proprietarios") 
             .then((response) => {
-                // Armazenar os dados dos proprietários na variável proprietarios
                 this.proprietarios = response.data;
             })
             .catch((error) => {
@@ -90,15 +88,12 @@ export default {
                 id_proprietario: this.id_proprietario,
             };
 
-            // Envia os dados do veículo para o servidor através de uma requisição POST
             axios
                 .post("/veiculos", formData)
                 .then((response) => {
-                    // Lógica de redirecionamento ou tratamento da resposta do servidor
                     console.log(response.data);
                 })
                 .catch((error) => {
-                    // Tratar erros, se necessário
                     console.log(error);
                 });
         },

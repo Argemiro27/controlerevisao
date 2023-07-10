@@ -51,14 +51,11 @@ export default {
         sexo: this.sexo
       };
       
-      // Envia os dados do proprietário para o servidor através de uma requisição POST
       axios.post('/proprietarios', formData)
         .then(response => {
-          // Lógica de redirecionamento ou tratamento da resposta do servidor
           console.log(response.data);
         })
         .catch(error => {
-          // Tratar erros, se necessário
           console.log(error);
         });
     }

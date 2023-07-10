@@ -55,32 +55,26 @@ export default {
         };
     },
     mounted() {
-        // Buscar os dados dos proprietários do servidor
         axios
-            .get("/api/proprietarios") // Certifique-se de ajustar a rota corretamente
+            .get("/api/proprietarios") 
             .then((response) => {
-                // Armazenar os dados dos proprietários na variável proprietarios
                 this.proprietarios = response.data;
             })
             .catch((error) => {
-                // Tratar erros, se necessário
                 console.log(error);
             });
     },
     methods: {
         excluirProprietario(id) {
-            // Realize a chamada para excluir o proprietário do servidor
             axios
-                .delete(`/api/proprietarios/${id}`) // Certifique-se de ajustar a rota corretamente
+                .delete(`/api/proprietarios/${id}`)
                 .then((response) => {
-                    // Remova o proprietário excluído da lista
                     const index = this.proprietarios.findIndex((proprietario) => proprietario.id === id);
                     if (index !== -1) {
                         this.proprietarios.splice(index, 1);
                     }
                 })
                 .catch((error) => {
-                    // Trate erros, se necessário
                     console.log(error);
                 });
         },

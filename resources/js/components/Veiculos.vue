@@ -38,9 +38,7 @@ export default {
         };
     },
     mounted() {
-        // Fazer a requisição para obter os carros cadastrados
         this.getCarros();
-        // Fazer a requisição para obter os proprietários cadastrados
         this.getProprietarios();
     },
     methods: {

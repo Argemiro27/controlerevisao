@@ -63,10 +63,10 @@ export default {
       tipo: "",
       descricao: "",
       id_carro: "",
-      carros: [], // Alterado de 'veiculos' para 'carros'
+      carros: [], 
     };
   },
-  
+
   methods: {
     submitForm() {
       const formData = {
@@ -92,7 +92,7 @@ export default {
     axios
       .get("/api/veiculos")
       .then((response) => {
-        this.carros = response.data; // Alterado de 'veiculos' para 'carros'
+        this.carros = response.data; 
       })
       .catch((error) => {
         console.log(error);
